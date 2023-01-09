@@ -1,0 +1,19 @@
+def main():
+
+    # prompt user for input
+    rp = input()
+
+    # change char to emoji
+    result = convert(rp)
+
+    # print the result
+    print(result)
+
+def convert(rp):
+    #Replace happy emoji
+    rp1 = rp.replace(":)", "🙂")
+    #replace sad emoji
+    rp2 =rp1.replace(":(", "🙁")
+    #return replacements
+    return rp2
+main()
