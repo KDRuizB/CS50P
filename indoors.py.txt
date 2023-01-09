@@ -1,0 +1,8 @@
+# prompt user for input
+i = input("Say Something! ")
+
+# every letter will be lowercase
+lc = i.casefold()
+
+#print result
+print(lc)
