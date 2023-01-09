@@ -1,0 +1,8 @@
+# prompt user for input
+m = int(input("m: "))
+
+# calculate energy E = mc**2
+E = m * 300000000**2
+
+# print result
+print("E: ", E)
