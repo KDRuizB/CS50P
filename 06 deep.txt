@@ -1,10 +1,10 @@
 # prompt user for input
-
 answear = input("What is the answear, of the great question? ")
 
+# modify any input cases of ("Forty Two"/"42") to ("forty two"/"42")
 updateAnswear = answear.strip(" ").replace("-", " ").casefold()
-# check input with an if condition
 
+# check input with an if condition
 match updateAnswear:
 # if input equals 42 = Yes
     case '42':
