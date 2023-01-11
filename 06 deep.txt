@@ -2,17 +2,15 @@
 
 answear = input("What is the answear, of the great question? ")
 
+updateAnswear = answear.strip(" ").replace("-", " ").casefold()
 # check input with an if condition
-# if input equals 42 = Yes
 
-match answear:
+match updateAnswear:
+# if input equals 42 = Yes
     case '42':
         print("Yes")
-# if input equals Forty TWO = Yes
-    case 'Forty Two':
-        print("Yes")
 # if input equals forty-two = Yes
-    case 'forty-two':
+    case 'forty two':
         print("Yes")
 # if input equals none = No
     case _:
