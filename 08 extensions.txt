@@ -1,0 +1,31 @@
+# prompt user for input
+filetype = input("Enter a Filename: ")
+
+# modify user input
+filetypeUpdate = filetype.replace("jpeg", "jpg").strip(" ").casefold()
+
+"""
+.gif = image/gif
+.jpg = image/jpeg
+.jpeg = image/jpeg
+.png = image/png
+.pdf = application/pdf
+.txt = text/plain
+.zip = application/zip
+"""
+
+# checking filetype cases
+if filetypeUpdate.endswith(".jpg") == True:
+    print("image/jpeg")
+elif filetypeUpdate.endswith(".gif") == True:
+    print("image/gif")
+elif filetypeUpdate.endswith(".png") == True:
+    print("image/png")
+elif filetypeUpdate.endswith(".pdf") == True:
+    print("application/pdf")
+elif filetypeUpdate.endswith(".txt") == True:
+    print("text/plain")
+elif filetypeUpdate.endswith(".zip") == True:
+    print("application/zip")
+else:
+    print("application/octet-stream")
