@@ -1,0 +1,20 @@
+# prompt user input(greeting)
+greeting = input("Greeting: ")
+
+# modify user input for if conditions
+greetingUpdate = greeting.casefold().strip(" ")
+
+# checking if the Scanner found something
+hScanner = greetingUpdate.find("h", 0, 1)
+helloScanner = greetingUpdate.find("hello")
+
+# check greeting conditions
+# if input equals "hello" = $0
+if helloScanner == 0:
+    print("$0")
+# if input starts with h and is not hello
+elif greetingUpdate != 'hello' and hScanner == 0:
+    print("$20")
+# else
+else:
+    print("$100")
