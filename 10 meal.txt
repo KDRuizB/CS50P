@@ -1,0 +1,32 @@
+def main():
+    # prompt user for input
+    time = input("What time is it? ")
+
+    timeC = convert(time)
+
+    if timeC >= 7.0 and timeC <= 8.0:
+        print("breakfast time")
+    elif timeC >= 12.0 and timeC <= 13.0:
+        print("lunch time")
+    elif timeC >= 18.0 and timeC <= 19.0:
+        print("dinner time")
+
+def convert(time):
+
+    # split time into:
+    hours, minutes = time.split(":")
+
+    # convert minutes and hours into floats
+    hours = float(hours)
+    minutes = float(minutes)
+
+    #convert minutes into decimal number
+    minutes = ((minutes * 100.0) / 60.0) / 100.0
+
+    # add hours + minutes
+    time = hours + minutes
+
+    return time
+
+if __name__ == "__main__":
+    main()
