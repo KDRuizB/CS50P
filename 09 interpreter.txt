@@ -1,0 +1,38 @@
+def main():
+
+    # prompt the user for input
+
+    userInt = input("What is X, what is Y, what is Z? ")
+    x, y, z = userInt.split(" ", 3)
+
+    # turn int's to floats
+    x = float(x)
+    z = float(z)
+
+    # round x and z to first digit
+    xR = round(x, 1)
+    zR = round(z, 1)
+
+    # lokking wich operator "y" is
+    result = calc(xR, y, zR)
+
+    # print result
+    print(result)
+
+def calc(x, y, z):
+    if y == "+":
+        return x + z
+    elif y == "-":
+        return x - z
+    elif y == "*":
+        return x * z
+    elif y == "/":
+        return x / z
+
+
+"""
+x = integer
+y = operator
+z = integer
+"""
+main()
