@@ -1,0 +1,8 @@
+# creat a dictionarry
+nameDict = {'name': 'name', 'firstName': 'first_name', 'preferredFirstName': 'preferred_first_name'}
+
+# prompt user for input a name
+name = input("What's your Name? ")
+
+# print the chosen name
+print(nameDict[name])
