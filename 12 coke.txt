@@ -1,0 +1,36 @@
+def main():
+
+    # price for one coke
+    cokePrice = 50
+
+    # check how much due is left
+    while True:
+
+            # make a coin dictionarry
+            coinDict = {"25": 25, "10": 10, "5": 5}
+
+            #prompt user to insert a coin
+            coin_ammount = input("Insert a Coin! ")
+
+            # ignoring invalid input
+            if coin_ammount != "25" and coin_ammount != "10" and coin_ammount != "5":
+                print("Amount due: ", cokePrice)
+                continue
+
+            elif coin_ammount == "25" or coin_ammount == "10" or coin_ammount == "5":
+
+                # subtract coinammount with the cokePrice
+                cokePrice = cokePrice - coinDict[coin_ammount]
+
+                # show due left
+                if cokePrice > 0:
+                    print("Amount due: ", cokePrice)
+                    continue
+
+                # if user payed complete price
+                elif cokePrice <= 0:
+                    cokePrice = cokePrice - (cokePrice * 2)
+                    print("Change owed: ", cokePrice)
+                    break
+
+main()
