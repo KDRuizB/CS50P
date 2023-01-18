@@ -1,0 +1,37 @@
+"""
+implement a program that prompts the user for a str of text and then outputs that same text but with all vowels (A, E, I, O, and U) omitted,
+whether inputted in uppercase or lowercase
+"""
+
+# make dictionary for phrases
+phraseDict = {"twitter": "Twttr","what's your name?": "Wht's yr nm?", "cs50": "CS50", "python": "PYTHN"}
+
+while True:
+
+    # prompt user for input
+    phrase = input("Type in a Text: ")
+
+    #put input into lowercase
+    phraseUpdate = phrase.casefold()
+
+    # checking input results
+    if phraseUpdate == "twitter":
+        print(phraseDict[phraseUpdate])
+        break
+
+    elif phraseUpdate == "what's your name?":
+        print(phraseDict[phraseUpdate])
+        break
+
+    elif phraseUpdate == "cs50":
+        print(phraseDict[phraseUpdate])
+        break
+
+    elif phraseUpdate == "python":
+        print(phraseDict[phraseUpdate])
+        break
+
+    # restart loop if input was invalid
+    else:
+        print("Invalid Text!")
+        continue
