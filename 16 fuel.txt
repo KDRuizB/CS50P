@@ -1,0 +1,63 @@
+def main():
+
+    while True:
+
+        # if valid input
+        try:
+            # prompt user for input
+            z = input("Give a Fraction: ")
+
+            # split input in two char
+            x, y = z.split("/")
+
+            # bool for allocation
+            vB = True
+            # function explenation @ def percent(n, m)
+            z, vV = percent(x, y, vB)
+
+            # if x isn't bigger then y
+            if z == z and vV == True:
+                #check amount
+                if z <= 1:
+                    print("E")
+                elif z == 25:
+                    print("25%")
+                elif z == 50:
+                    print("50%")
+                elif z == 75:
+                    print("75%")
+                elif z >= 99:
+                    print("F")
+                else:
+                    print(int(round(z, 0)),"%", sep="")
+            # if vV isn´t false
+            elif vV == False:
+                print("reject")
+                continue
+
+        # if an error occurs retry ...
+        except (ValueError, ZeroDivisionError):
+            pass
+        else:
+            break
+
+# calculation inputs percentage
+def percent(n, m, zB):
+    n = int(n)
+    m = int(m)
+
+    if n <= m:
+        if n < 100:
+            p = n / m * 100
+            zB = True
+            return p, zB
+        elif n == m:
+            p = n / m * 100
+            zB = True
+            return p, zB
+    else:
+        p = None
+        zB = False
+        return p, zB
+
+main()
