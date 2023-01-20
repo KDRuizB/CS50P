@@ -1,0 +1,38 @@
+"""
+In a file called nutrition.py, implement a program that prompts consumers users to input a fruit (case-insensitively)
+and then outputs the number of calories in one portion of that fruit, per the FDA’s poster for fruits, which is also available as text.
+Capitalization aside, assume that users will input fruits exactly as written in the poster (e.g., strawberries, not strawberry).
+Ignore any input that isn’t a fruit.
+"""
+
+# create fruit dict
+fruitDict = {
+    'apple': 'Calories: 130',
+    'Avocado': 'Calories: 50',
+    'banana': 'Calories: 110',
+    'cantaloupe': 'Calories: 50',
+    'grapefruit': 'Calories: 60',
+    'grapes': 'Calories: 90',
+    'honeydew melon': 'Calories: 50',
+    'Kiwifruit': 'Calories: 90',
+    'lemon 1 medium': 'Calories: 15',
+    'lime 1 medium': 'Calories: 20',
+    'nectarine 1 medium': 'Calories: 60',
+    'Orange 1 medium': 'Calories: 80',
+    'Peach 1 medium': 'Calories: 60',
+    'pear': 'Calories: 100',
+    'Pineapple 2 slices, 3" diameter, 3/4" thick': 'Calories: 50',
+    'Plums 2 medium': 'Calories: 70',
+    'Strawberries 8 medium': 'Calories: 50',
+    'Sweet Cherries': 'Calories: 100',
+    'Tangerine 1 medium': 'Calories: 50',
+    'Watermelon 1/18 medium melon; 2 cups diced pieces': 'Calories: 80',
+    }
+
+# prompt user for item
+fruit = input("Item: ")
+
+# print caloris if true
+if fruit in fruitDict:
+    print(fruitDict[fruit])
+
