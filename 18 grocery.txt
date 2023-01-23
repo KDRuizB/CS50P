@@ -1,0 +1,24 @@
+# make a dict
+grocerys = {}
+
+# loop until user exit the programm
+while True:
+
+    # while programm is running
+    try:
+        # prompt user for input
+        item = input().lower()
+
+        # check if item exist
+        if item in grocerys:
+            grocerys[item] += 1
+        # if ther is only 1
+        else:
+            grocerys[item] = 1
+
+    # when user end the programm
+    except EOFError:
+        # print list in alphabetical order
+        for key in sorted(grocerys.keys()):
+            print(grocerys[key], key.upper())
+        break
