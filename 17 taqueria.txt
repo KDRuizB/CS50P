@@ -1,0 +1,41 @@
+def main():
+    # felipeDict
+    felipeDict = {
+        "Baja Taco": 4.00,
+        "Burrito": 7.50,
+        "Bowl": 8.50,
+        "Nachos": 11.00,
+        "Quesadilla": 8.50,
+        "Super Burrito": 8.50,
+        "Super Quesadilla": 9.50,
+        "Taco": 3.00,
+        "Tortilla Salad": 8.00
+    }
+
+    # value to update
+    totalCost = 0
+
+    while True:
+
+        try:
+            # prompt user for Item's
+            item = input("Place an order here: ").title()
+
+            # After each inputted item, display the total cost of all items inputted thus far,
+            # prefixed with a dollar sign ($) and formatted to two decimal places.
+            itemU = felipeDict[item]
+
+            totalCost = totalCost + itemU
+
+            print("Total: $", end="")
+            print("{:.2f}".format(totalCost))
+        # handling EOF error ('ctrl' + 'd')
+        except EOFError:
+            print()
+            break
+        # Treat the user’s input case insensitively. Ignore any input that isn’t an item.
+        except KeyError:
+            pass
+
+        # Assume that every item on the menu will be titlecased.
+main()
