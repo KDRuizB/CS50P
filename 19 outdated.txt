@@ -1,0 +1,78 @@
+# month's librrary
+months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+]
+
+month = None
+
+while True:
+    try:
+        if (month == 9 or month == 10) and day.endswith(","):
+            #check if month isdigit or alpha
+                day = day.replace(",", "")
+                day = int(day)
+                if month in months:
+                    month = months.index(month) + 1
+                else:
+                    month = int(month)
+
+                day = int(day)
+                # year must be digits and at least 4 char long
+                if year.isdigit() == True and len(year) == 4:
+                    # if month is in list or max 12
+                    if month <= 12:
+                        # max 31 days
+                        day = int(day)
+                        if day <= 31:
+                            # print result
+                            month = str(month).rjust(2, "0")
+                            day = str(day).rjust(2, "0")
+                            print(year, month, day, sep="-")
+                            break
+        elif month == None:
+
+            # prompt user for input
+            date = input("'anno Domini' Date: ").title().replace("/", " ")
+
+            # split input in month, day and year
+            month, day, year = date.split()
+
+            day = str(day)
+
+            if day.endswith(",") == False and ((month.find("October") == 0 and day.endswith(",") == False) or (month.find("September") == 0 and day.endswith(",") == False)):
+                continue
+            else:
+                #check if month isdigit or alpha
+                if month in months:
+                    month = months.index(month) + 1
+                else:
+                    month = int(month)
+
+                day = int(day)
+                # year must be digits and at least 4 char long
+                if year.isdigit() == True and len(year) == 4:
+                    # if month is in list or max 12
+                    if month <= 12:
+                        # max 31 days
+                        day = int(day)
+                        if day <= 31:
+                            # print result
+                            month = str(month).rjust(2, "0")
+                            day = str(day).rjust(2, "0")
+                            print(year, month, day, sep="-")
+                            break
+
+    except (ValueError):
+        print()
+        continue
