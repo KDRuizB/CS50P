@@ -1,0 +1,15 @@
+import emoji
+
+
+def main():
+
+    # prompt user for emoji
+    u_input = input("Input: ").replace("Input: ", "")
+    # result capture
+    print("Output: ", end="")
+    # print emoji that user chosed
+    print(emoji.emojize(u_input, language="alias"))
+
+
+main()
+
