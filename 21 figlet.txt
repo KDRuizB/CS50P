@@ -1,0 +1,71 @@
+import sys
+import random
+from pyfiglet import Figlet
+
+figlet = Figlet()
+
+try:
+# if there are 2 line arguments
+    if len(sys.argv) == 3:
+        if (sys.orig_argv[2] == "-f") or (sys.orig_argv[2] == "--font"):
+            # font list
+            f_list = figlet.getFonts()
+            if sys.orig_argv[3] in f_list:
+                # give text, font and font style a variable
+                t = input("Input: ")
+
+                # checking if the font exist
+                if sys.orig_argv[3] in f_list:
+
+                    # get the key value
+                    f_font = sys.orig_argv[3]
+
+                    # give users thext the random font
+                    figlet.setFont(font=f_font)
+
+                    # print result
+                    print("Output: ")
+                    print()
+                    print(figlet.renderText(t))
+                    sys.exit(0)
+
+                else:
+                    print("Invalid usage")
+                    sys.exit(0)
+
+            else:
+                print("Invalid usage")
+                sys.exit(1)
+    else:
+        print("Invalid usage")
+        sys.exit(1)
+    # if there is no line argument
+    if len(sys.argv) == 1:
+        # users Text
+        t = input("Input: ")
+        # get font list
+        f_list = figlet.getFonts()
+        # get random font
+        f = random.randint(0, 100)
+
+        # give the random value the font style
+        f_font = f_list[f]
+
+        # give users thext the random font
+        figlet.setFont(font=f_font)
+
+        # print the result
+        print("Output: ")
+        print()
+        print(figlet.renderText(t))
+        sys.exit(0)
+
+    # print invalid if none fit's
+    else:
+        print("Invalid usage")
+        sys.exit(1)
+except:
+    if f_font == None:
+        sys.exit(1)
+    else:
+        sys.exit(0)
