@@ -1,0 +1,31 @@
+import random
+
+while True:
+    try:
+        # get level difficulty
+        set_value = int(input("Level: "))
+        if set_value > 0:
+            # random number, for range of difficulty
+            ran_value = random.randint(0, set_value)
+            # checking if value is a digit and positiv
+            while True:
+                get_value = int(input("Guess: "))
+                # handle cases
+                if get_value >= 1:
+                    if get_value < ran_value:
+                        print("Too small!")
+                        continue
+                    elif get_value > ran_value:
+                        print("Too large!")
+                        continue
+                    elif get_value == ran_value:
+                        print("Just right!")
+                        break
+                else:
+                    continue
+        else:
+            continue
+        break
+    # if input is alphabetic
+    except ValueError:
+        continue
