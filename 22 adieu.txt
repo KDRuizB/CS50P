@@ -1,0 +1,35 @@
+import inflect
+import sys
+
+p = inflect.engine()
+
+namesLib = []
+
+def main():
+
+    # promt user for name
+    while True:
+        # add's all names to librarry
+        try:
+            # prompt user for name
+            name = input("Type a name: ")
+
+            # add name to list
+            namesLib.append(name)
+
+        # when the user is finish with input
+        except EOFError:
+            print()
+            # sepperate names
+            namePlib = p.join(namesLib)
+            #print result
+            print("Adieu, adieu, to ", namePlib, sep="")
+            #exit programm
+            sys.exit(0)
+
+main()
+
+
+"""
+don't forget to: "install inflect"
+"""
