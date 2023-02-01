@@ -1,0 +1,110 @@
+import random
+
+# safeing values
+x_values = []
+y_values = []
+
+def main():
+
+    get_level()
+    score = generate_integer(get_level)
+    print("Score:", score)
+
+def get_level():
+    # user input
+    while True:
+        try:
+            lvl = int(input("Level: "))
+            #checking if input is valid
+            if lvl == 1:
+                # create questions
+                for _ in range(0, 10):
+                    # crate random number
+                    x = random.randint(0, 10)
+                    x_values.append(x)
+                    y = random.randint(0, 10)
+                    y_values.append(y)
+                return lvl
+            elif lvl == 2:
+                # create questions
+                for _ in range(0, 10):
+                    # crate random number
+                    x = random.randint(10, 99)
+                    x_values.append(x)
+                    y = random.randint(10, 99)
+                    y_values.append(y)
+                return lvl
+            elif lvl == 3:
+                # create questions
+                for _ in range(0, 10):
+                    # crate random number
+                    x = random.randint(100, 999)
+                    x_values.append(x)
+                    y = random.randint(100, 999)
+                    y_values.append(y)
+                return lvl
+            else:
+                continue
+        except ValueError:
+                continue
+def generate_integer(level):
+    # define score
+    score = 0
+    wrong_value = 0
+    i = 0
+    # only to check value order
+    x = x_values[i]
+    y = y_values[i]
+
+    #10 questions
+    for i in range(0, 10):
+        # if 3 types the wrong answear
+        if wrong_value < 3:
+            try:
+                # get user's result
+                solve_value = x_values[i] + y_values[i]
+                solve = int(input(f"{x_values[i]} + {y_values[i]} = "))
+                # check result
+                # if correct
+                if solve == solve_value:
+                    score += 1
+                    print(end="")
+                # if wrong answear
+                else:
+                    i == i
+                    print("EEE")
+                    # 3 try's for right answear
+                    for _ in range(0, 2):
+                        solve = int(input(f"{x_values[i]} + {y_values[i]} = "))
+                        # if false
+                        if solve != solve_value:
+                            print("EEE")
+                            wrong_value += 1
+                        # if right answear, befor the 3 try`s
+                        elif solve == solve_value:
+                            score += 1
+                            break
+                    # skip and show right answear
+                    print(f"{x_values[i]} + {y_values[i]} = {solve_value}")
+                    wrong_value = 0
+            # except alphabetic input = False
+            except ValueError:
+                # the same as in "wrong answear"
+                i == i
+                print("EEE")
+                for _ in range(0, 2):
+                    solve = int(input(f"{x_values[i]} + {y_values[i]} = "))
+                    if solve != solve_value:
+                        print("EEE")
+                        wrong_value += 1
+                    elif solve == solve_value:
+                        score += 1
+                        break
+                # skip and show right answear
+                print(f"{x_values[i]} + {y_values[i]} = {solve_value}")
+                wrong_value = 0
+    return score
+
+
+if __name__ == "__main__":
+    main()
