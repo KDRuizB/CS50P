@@ -1,0 +1,48 @@
+import requests
+import sys
+
+r = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+# give json_info the dict information
+json_info = r.json()
+
+def main():
+
+    # go to the USD dict and get the current float
+    rate_float = openDict(json_info)
+
+    try:
+        # check if input is valid
+        if len(sys.argv) == 2:
+
+            # turn users argument into float
+            coin_amount = float(sys.argv[1])
+
+            # calculate curencys worth in USD
+            calc_currency = coin_amount * rate_float
+
+            # print the Value in USD
+            print(f"${calc_currency:,.4f}")
+
+        else:
+            # when the user input is wrong, exit the programm with an error
+            print("Invalid 'command-line argument'!")
+            sys.exit(1)
+
+    # handling errors
+    except requests.RequestException:
+        print("RequestError")
+        sys.exit(1)
+    except ValueError:
+        print("ValueError")
+        sys.exit(1)
+
+
+def openDict(open_dict):
+    # open each dict till destination
+    if open_dict == json_info:
+        value = open_dict["bpi"]
+        value2 = value["USD"]
+        value3 = value2["rate_float"]
+        return value3
+
+main()
