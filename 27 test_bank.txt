@@ -1,0 +1,51 @@
+main Part:
+
+import sys
+
+def main():
+    # prompt user input(greeting)
+    greetingUpdate = int(value(input("Greeting: ")))
+    print(greetingUpdate)
+    sys.exit(0)
+
+def value(greeting):
+    # modify user input for if conditions
+    greetingUpdate = greeting.casefold().replace(" ", "")
+
+    # checking if the first letter is an h
+    hScanner = greetingUpdate.find("h", 0, 1)
+    helloScanner = greetingUpdate.find("hello")
+
+    # check greeting conditions
+    # if input equals "hello" = $0
+    if helloScanner == 0 and greetingUpdate[0:5] == 'hello':
+        return 0
+    # if input starts with h and is not hello
+    elif greetingUpdate[0:5] == 'hello' or hScanner == 0:
+        return 20
+    # else
+    else:
+        return 100
+
+
+if __name__ == "__main__":
+    main()
+
+test Part:
+
+from bank import value
+
+def test_value_0():
+    assert value("Hello David") == 0
+    assert value("Hello") == 0
+    assert value("HelloHello") == 0
+
+def test_value_20():
+    assert value("Hamburger") == 20
+    assert value("Hi") == 20
+    assert value("How are you") == 20
+
+def test_value_100():
+    assert value("Ron") == 100
+    assert value("That") == 100
+    assert value("OK") == 100
