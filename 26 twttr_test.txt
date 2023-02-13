@@ -1,0 +1,41 @@
+main Part:
+
+import sys
+
+def main():
+    # user input
+    word = input("Type a word: ")
+    # get userInput
+    word_mod = shorten(word)
+    # print result
+    print(word_mod)
+    sys.exit(0)
+
+
+def shorten(word):
+    # define word new
+    word1 = word
+    # modify user input
+    word_mod = word1.replace("a", "").replace("e", "").replace("i", "").replace("o", "").replace("u", "").replace("A", "").replace("E", "").replace("I", "").replace("O", "").replace("U", "")
+    # return result
+    return word_mod
+
+
+
+if __name__ == "__main__":
+    main()
+
+test Part:
+
+from twttr import shorten
+
+def test_shorten():
+   assert shorten("twitter") == "twttr"
+   assert shorten("TWITTER") == "TWTTR"
+   assert shorten("TwItTeR") == "TwtTR"
+
+def test_shorten_noNumber():
+   assert shorten("1234") == "1234"
+
+def test_shorten_noPunctuation():
+   assert shorten(".?!,") == '.?!,'
