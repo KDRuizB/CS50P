@@ -1,0 +1,84 @@
+main Part:
+
+def main():
+
+    plate = is_valid(input("Type a Plate: "))
+
+    if plate == True:
+        print("Valid")
+    else:
+        print("Invalid")
+
+
+def is_valid(s):
+# s must be at least 6 char / min 2
+    if len(s) < 2 or len(s) > 6:
+        return False
+    # check if the first two letters is alpha
+    if s[0].isalpha() == False or s[1].isalpha() == False:
+        return False
+    # check if the first number is 0
+    i = 0
+    for i in range(len(s)):
+        if s[i].isdigit():
+            if not s[i:].isdigit():
+                return False
+        i += 1
+
+    # checking if number starts with 0
+    l = 0
+    while l < len(s):
+        if s[l].isalpha() == False:
+            if s[l] == '0':
+                return False
+            else:
+                break
+        l += 1
+
+    for c in s:
+        if c in [" ", ".", "!", "?"]:
+            return False
+
+    if s.isalnum() == False:
+        return False
+
+
+test Part:
+
+from plates import is_valid
+
+def test_is_valid_true():
+    assert is_valid("aabb22") == True
+    assert is_valid("bbcc33") == True
+    assert is_valid("ddee44") == True
+    assert is_valid("abcde1") == True
+
+def test_is_valid_false():
+    assert is_valid("") == False
+    assert is_valid("112233") == False
+    assert is_valid("aa2a2a") == False
+    assert is_valid("a") == False
+
+def test_is_valid_length():
+    assert is_valid("a") == False
+    assert is_valid("aadawdawdwad1212") == False
+    assert is_valid("aabb223") == False
+    assert is_valid("") == False
+
+def test_is_valid_order():
+    assert is_valid("22aa22") == False
+    assert is_valid("aab2b2") == False
+    assert is_valid("a1bcde") == False
+    assert is_valid("ab1cd1") == False
+
+def test_is_valid_allNum():
+    assert is_valid("aavv?") == False
+
+def test_is_valid_zeroPlacement():
+    assert is_valid("CS05") == False
+    assert is_valid("CS50") == True
+
+    return True
+
+if __name__ == "__main__":
+    main()
