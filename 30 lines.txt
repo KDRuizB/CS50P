@@ -1,0 +1,43 @@
+import sys
+
+def main():
+        commandLineCheck()
+        # check if the file exist
+        try:
+            #open file
+            f = open(sys.argv[1], "r")
+            # read amount of lines
+            content = (f.readlines())
+            count_lines = 0
+            for line in content:
+                if checkLine(line) == False:
+                    count_lines += 1
+            # print result
+            print(count_lines)
+            # close file
+            f.close()
+            # normal exit
+            sys.exit(0)
+        except FileNotFoundError:
+            # error if file dose not exist
+            sys.exit("File does not exist")
+
+def commandLineCheck():
+    # checking if there to many command-line arguments
+    if len(sys.argv) > 2:
+        sys.exit("To many command-line arguments")
+    # error if there are to few command line arguments
+    if len(sys.argv) < 2:
+        sys.exit("Too few command-line arguments")
+    # checking if it's a python file
+    if sys.argv[1].endswith(".py") == False:
+           sys.exit("Not a Python file")
+
+def checkLine(line):
+    if line.isspace():
+        return True
+    if line.lstrip().startswith('#'):
+        return True
+    return False
+
+main()
