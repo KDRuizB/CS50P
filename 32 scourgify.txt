@@ -1,0 +1,63 @@
+import sys
+import csv
+
+def main():
+    # at least two command-line arguments
+    check_command()
+
+    # name of an existing csv file to read as input, columns in order: name/house
+    output = open_dict()
+
+    # change the header names
+    header_map = {'name': 'first', 'surname': 'last', 'house': 'house'}
+    updated_rows = []
+    for row in output:
+        updated_row = {}
+        for key, value in row.items():
+            updated_key = header_map.get(key, key)
+            updated_row[updated_key] = value
+        updated_rows.append(updated_row)
+
+    # write content to the new csv file
+    fieldnames = ['first', 'last', 'house']
+    with open(sys.argv[2], 'w', newline='') as output_file:
+        writer = csv.DictWriter(output_file, fieldnames=fieldnames)
+
+        writer.writeheader()
+
+        for row in updated_rows:
+            writer.writerow(row)
+
+    with open(sys.argv[2], 'r', newline='') as result_file:
+        r_reader = csv.DictReader(result_file)
+        rows = list(r_reader)  # Save contents of file to a variable
+
+        for row in rows:
+            print(row['first'], row['last'], row['house'])
+
+def check_command():
+    # checking length of command-line arguments
+    if len(sys.argv) == 3:
+        pass
+    elif len(sys.argv) < 3:
+        sys.exit("Too few command-line arguments")
+    elif len(sys.argv) > 3:
+        sys.exit("Too many command-line arguments")
+
+def open_dict():
+    output = []
+    try:
+        with open(sys.argv[1], 'r', newline='') as input_file:
+            reader = csv.DictReader(input_file)
+            for row in reader:
+                split_name = row["name"].split(",")
+                if len(split_name) >= 2:
+                    output.append({'first': split_name[1].lstrip(), 'last': split_name[0], "house": row["house"]})
+                else:
+                    print("Invalid name format:", row["name"])
+            return output
+    except FileNotFoundError:
+        sys.exit("Could not read file")
+
+
+main()
