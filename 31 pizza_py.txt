@@ -1,0 +1,50 @@
+import sys
+import csv
+from tabulate import tabulate
+
+itemTable = []
+table = []
+
+def main():
+
+    # checking command-line arguments
+    check_commandLine()
+
+    # get the different rows for regular or sicilian pizza
+    pizza, small, large = get_headers()
+
+    table.append(pizza)
+    table.append(small)
+    table.append(large)
+
+    try:
+        # open file
+        with open(sys.argv[1], "r") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                itemTable.append(row)
+
+        print(tabulate(itemTable, tablefmt="grid", headers="keys"))
+#headers=[pizza, small, large], tablefmt="pretty")
+
+    except FileNotFoundError:
+        sys.exit("File does not exist")
+
+# checking command line
+def check_commandLine():
+    # check if there are to many command-line arguments
+    if len(sys.argv) > 2:
+        sys.exit("Too many command-line arguments")
+    # check if there to few comman-line arguments
+    if len(sys.argv) < 2:
+        sys.exit("Too few command-line arguments")
+    if sys.argv[1].endswith(".csv") == False:
+        sys.exit("Not a CSV file")
+
+def get_headers():
+    f = open(sys.argv[1], "r")
+    pizza, small, large = (f.readline()).split(",")
+    large = large.strip()
+    return pizza, small, large
+
+main()
