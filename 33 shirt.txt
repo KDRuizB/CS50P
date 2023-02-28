@@ -1,0 +1,53 @@
+import sys
+from PIL import Image, ImageOps
+
+# global data
+arg1 = sys.argv[1].split(".")[1]
+arg2 = sys.argv[2].split(".")[1]
+
+def main():
+    # checking given command-line arguments
+    CheckCommand()
+    # checking for file format
+    CheckOutput()
+    try:
+        # open image and make a copy
+        img = Image.open(sys.argv[1])
+        img = ImageOps.fit(img, [600,600], bleed=0.0, centering=(0.5, 0.5))
+        copy = img.copy()
+        # open image to paste and rezise
+        img2 = Image.open("shirt.png")
+        img2 = img2.resize(img.size)
+        # paste the second image over the first one
+        copy.paste(img2, (0, 0), img2)
+        # last check if result image stays the same format
+        CheckSameFiletype()
+        # check if the reult is falid befor saving
+        copy.save(sys.argv[2])
+
+    except FileNotFoundError:
+        sys.exit("Input does not exist")
+
+    print("DONE!")
+
+def CheckCommand():
+    if len(sys.argv) == 3:
+        pass
+    elif len(sys.argv) > 3:
+        sys.exit("Too many command-line arguments")
+    elif len(sys.argv) < 3:
+        sys.exit("Too few command-line arguments")
+
+def CheckOutput():
+        if arg2 in ['jpg', 'jpeg', 'png']:
+            pass
+        else:
+            sys.exit("Invalid Output")
+
+def CheckSameFiletype():
+    if arg1 == arg2:
+        pass
+    else:
+        sys.exit("Input and output have different extensions")
+
+main()
