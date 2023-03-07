@@ -1,0 +1,15 @@
+from validator_collection import validators, checkers, errors
+
+try:
+
+    # prompt user for an email adress
+    i = input("What's your email adress? ")
+
+    # save e-mail adress with validation
+    email_address = validators.email(i, allow_empty = True)
+
+    if email_address == email_address:
+        print("Valid")
+        
+except errors.InvalidEmailError:
+    print("Invalid")
