@@ -1,0 +1,21 @@
+import re
+
+# <iframe width="560" height="315" src="https://www.youtube.com/embed/xvFZjo5PgG0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+def main():
+
+    print(parse(input("HTML: ")))
+
+def parse(s):
+    # look if it's iframe html
+    if re.search(r"<iframe(.)*><\/iframe>", s):
+        # looking for valid url
+        mM = re.search(r"(http(s)*:\/\/(www\.)*youtube\.com\/embed\/)([a-zA-Z0-9]+)", s)
+        if mM:
+            # extract url parts
+            m = mM.groups()
+            # print the url with the default embeded link
+            return "https://youtu.be/" + m[3]
+
+if __name__ == "__main__":
+    main()
