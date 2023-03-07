@@ -1,0 +1,47 @@
+(source):
+
+import re
+
+def main():
+    print(count(input("Text: ")))
+
+# returns the number of times um was writen/sayed as int
+def count(s):
+    # save all words sepperate
+    words = []
+    # count um
+    um_count = 0
+    # split all words after each ","
+    word_list = s.split(",")
+    # add each word to list words
+    for word in word_list:
+        words.append(word)
+    # scann each word
+    for scann in words:
+        if re.findall(r"(?i)\bum\b", scann):
+            um_count += 1
+    return um_count
+
+
+if __name__ == "__main__":
+    main()
+
+
+(pytest):
+
+from um import count
+
+def main():
+    test_wrong_word()
+    test_case_insensitive()
+    test_right_value()
+
+def test_wrong_word():
+    assert count("um, hello, yummy") != 2
+def test_right_value():
+    assert count("um, hello,um") == 2
+def test_case_insensitive():
+    assert count("Um, i forgot what i wanted to say") == 1
+
+if __name__ in "__main__":
+    main()
