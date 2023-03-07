@@ -1,0 +1,137 @@
+(source):
+
+import re
+
+
+def main():
+    print(convert(input("Hours: ")))
+
+# def function convert (str) in 12h format, return the same in 24h format
+def convert(s):
+
+    # looking for valid time
+    s = s.strip()
+    m = re.search(r"^([0-9][0-2]*(:[0-5][0-9])* (AM)*(PM)*) to ([0-9][0-2]*(:[0-5][0-9])* (AM)*(PM)*)$", s)
+    if m:
+        # split time
+        time_piece = m.groups()
+        # extract important data
+        not_convert = time_piece[0] + ':' + time_piece[4]
+        # split data
+        essential = not_convert.split(":")
+        # check if minutes are given
+        if len(essential) > 2:
+            if essential[1].endswith(" PM") == True:
+                essential[0] = essential[0] + ':' + essential[1]
+            elif essential[1].endswith(" AM") == True:
+                essential[0] = essential[0] + ':' + essential[1]
+            else:
+                pass
+
+        if len(essential) > 2:
+            if essential[3].endswith(" PM") == True:
+                essential[1] = essential[2] + ':' + essential[3]
+            elif essential[3].endswith(" AM") == True:
+                essential[1] = essential[2] + ':' + essential[3]
+            else:
+                pass
+
+        e_minute = not_convert.split(":")
+        if len(e_minute) > 2:
+            if e_minute[1].endswith(" PM") == True:
+                e_minute[0] = e_minute[1].replace(" PM", "")
+            elif e_minute[1].endswith(" AM") == True:
+                e_minute[0] = e_minute[1].replace(" AM", "")
+            else:
+                pass
+
+        elif len(e_minute) == 2:
+            e_minute[0] = "00"
+
+        if len(e_minute) > 2:
+            if e_minute[3].endswith(" PM") == True:
+                e_minute[1] = e_minute[3].replace(" PM", "")
+            elif e_minute[3].endswith(" AM") == True:
+                e_minute[1] = e_minute[3].replace(" AM", "")
+            else:
+                pass
+        elif len(e_minute) == 2:
+            e_minute[1] = "00"
+
+        if essential[0].endswith("PM") == True:
+            d = essential[0].replace(" PM", "").replace(e_minute[0], "").replace(":", "")
+            H0 = int(d) + 12
+            if H0 < 10:
+                H1 = str(f"0{H0}")
+            part0 = str(H0)
+        else:
+            o = part0 = essential[0].replace(" AM", "").replace(e_minute[0], "").replace(":", "")
+            o = int(o)
+            if o < 10:
+                o = str(f"0{o}")
+            part0 = str(o)
+
+        if essential[1].endswith("PM") == True:
+            e = essential[1].replace(" PM", "").replace(e_minute[1], "").replace(":", "")
+            H1 = int(e) + 12
+            if H1 < 10:
+                H1 = str(f"0{H1}")
+            part1 = str(H1)
+        else:
+            O = part1 = essential[1].replace(" AM", "").replace(e_minute[1], "").replace(":", "")
+            O = int(O)
+            if O < 10:
+                O = str(f"0{O}")
+            part1 = str(O)
+
+        if part0 == "12":
+            part0 = "00"
+        elif part0 == "24":
+            part0 = "12"
+
+        if part1 == "12":
+            part1 = "00"
+        elif part1 == "24":
+            part1 = "12"
+
+        # format time
+        essential[0] = str(f"{part0}:{e_minute[0]}")
+        essential[1] = str(f"{part1}:{e_minute[1]}")
+
+        return(essential[0] + ' to ' + essential[1])
+    else:
+        raise ValueError
+
+if __name__ == "__main__":
+    main()
+
+"""
+9:00 AM to 5:00 PM
+9 AM to 5 PM
+"""
+
+(Pytest):
+
+from working import convert
+import pytest
+
+def main():
+    test_convert_right_noMinutes()
+    test_convert_wrong_noMinutes()
+    test_convert_wrong_minutes()
+    test_wrong_delimeter()
+
+def test_convert_right_noMinutes():
+    assert convert("9 AM to 10 AM") == "09:00 to 10:00"
+def test_convert_wrong_noMinutes():
+    with pytest.raises(ValueError):
+        convert("13 PM to 14 PM")
+def test_convert_wrong_minutes():
+    with pytest.raises(ValueError):
+        convert("10:60 AM to 9:70 PM")
+def test_wrong_delimeter():
+    with pytest.raises(ValueError):
+        convert("10:20 AM - 9:50 PM")
+
+if __name__ == "__main__":
+    main()
