@@ -1,0 +1,75 @@
+(source):
+
+from datetime import date
+import sys
+import inflect
+
+p = inflect.engine()
+
+def main():
+    # get user input
+    user_date = input("Date of Birth: ").split("-")
+    # prompt user for date of birth (YYYY-MM-DD) and check
+    date_birth = check_date(user_date)
+    # returns the day range
+    days = date_to_str(date_birth)
+    # calc the minutes and return in words
+    words = calc_minutes_give_str(days)
+    # print how old they are in minutes, roundet to the nearest integer (returning in words)
+    print(words + " " + "minutes")
+
+
+def check_date(user_date):
+    # check year
+    if len(user_date[0]) != 4:
+        sys.exit("Invalid date")
+    # check month
+    if len(user_date[1]) != 2 and (int(user_date[1]) <= 12 and int(user_date[1]) >= 1) and (int(user_date[2]) <= 31 and int(user_date[2]) >= 1):
+        sys.exit("Invalid date")
+    # check day
+    if len(user_date[2]) != 2 and (user_date[1] <= 31 and user_date[1] >= 1):
+        sys.exit("Invalid date")
+    return user_date
+
+def date_to_str(date_birth):
+    # get the day range between given date - today
+    birth_date = date(int(date_birth[0]), int(date_birth[1]), int(date_birth[2]))
+    today_date = date.today()
+    time_range = today_date - birth_date
+    return time_range.days
+
+def calc_minutes_give_str(days):
+    # calc minutes
+    minutes = days * 24 * 60
+    # give minutes back as a str
+    word = p.number_to_words(minutes, andword="").capitalize()
+    return word
+
+
+if __name__ == "__main__":
+    main()
+
+(pytest):
+
+# functions > 1
+from seasons import check_date, date_to_str, calc_minutes_give_str
+import pytest
+
+def main():
+    test_check_date()
+    test_date_to_str()
+    test_calc_minutes_give_str()
+
+def test_check_date():
+    with pytest.raises(SystemExit):
+        check_date("200000-12-09") == "Invalid date"
+
+def test_date_to_str():
+    assert date_to_str(date_birth = [2003, 12, 9]) == 7029
+
+def test_calc_minutes_give_str():
+    assert calc_minutes_give_str(7029) == "Ten million, one hundred twenty-one thousand, seven hundred sixty"
+
+
+if __name__ == "__main__":
+    main()
