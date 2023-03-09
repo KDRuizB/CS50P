@@ -1,2 +1,2 @@
 # CS50P
-edX CS50P course
+my progress in edX CS50P course + final project
