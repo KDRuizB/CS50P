@@ -1,0 +1,32 @@
+from fpdf import FPDF
+
+# output name of the PDF file should be: "CS50Shirtificate" centered horizontally
+# the name of the user should be on top of the shirt, in white text
+# set_auto_page_break to avoid page overflow
+
+class Shirt(FPDF):
+
+    # get the name variable
+    def get_name(self):
+        return input("Enter Name: ").strip()
+
+    # create the pdf
+    def shirtificate_gen(self):
+        self.add_page()
+        self.set_font("helvetica", "B", size=60)
+        self.cell(0, 60, 'CS50 Shirtificate', new_x="LMARGIN", new_y="NEXT", align='C')
+        self.image("shirtificate.png", w=self.epw)
+        self.set_font("Times", size=25)
+        self.set_text_color(255,255,255)
+        self.text(y=self.eph/2, x=self.epw/3, txt=f"{self.get_name()} took CS50" )
+
+        self.output("shirtificate.pdf")
+
+
+def main():
+    pdf = Shirt()
+    pdf.shirtificate_gen()
+
+
+if __name__=="__main__":
+    main()
